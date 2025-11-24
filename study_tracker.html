@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Study Time Tracker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="app-card">
+        <h1>Study Time Tracker</h1>
+        <p class="intro">
+            This program asks about your study time today and your weekly study goal.
+            It then estimates how many hours you are on track to study this week
+            and shows whether you are ahead of or behind your goal.
+        </p>
+
+        <form id="tracker-form" class="form">
+            <label for="dailyHours">
+                How many hours did you study today?
+                <input
+                    type="number"
+                    id="dailyHours"
+                    name="dailyHours"
+                    step="0.1"
+                    min="0"
+                    required
+                />
+            </label>
+
+            <label for="weeklyGoal">
+                What is your weekly study goal (in hours)?
+                <input
+                    type="number"
+                    id="weeklyGoal"
+                    name="weeklyGoal"
+                    step="0.1"
+                    min="0"
+                    required
+                />
+            </label>
+
+            <button type="submit" class="btn">Calculate</button>
+        </form>
+
+        <!-- Error / info message area (matches your print messages) -->
+        <p id="message" class="message"></p>
+
+        <!-- Output area for the "Study Summary" -->
+        <div id="summary" class="summary hidden">
+            <h2>Study Summary</h2>
+            <p id="summaryText1"></p>
+            <p id="summaryText2"></p>
+            <p id="summaryText3"></p>
+            <p id="interpretation"></p>
+
+            <p class="thanks">Thank you for using the Study Time Tracker!</p>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById("tracker-form");
+        const message = document.getElementById("message");
+        const summary = document.getElementById("summary");
+        const summaryText1 = document.getElementById("summaryText1");
+        const summaryText2 = document.getElementById("summaryText2");
+        const summaryText3 = document.getElementById("summaryText3");
+        const interpretation = document.getElementById("interpretation");
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            message.textContent = "";
+            summary.classList.add("hidden");
+            interpretation.textContent = "";
+
+            const dailyHoursInput = document.getElementById("dailyHours").value;
+            const weeklyGoalInput = document.getElementById("weeklyGoal").value;
+
+            // Basic error handling like your try/except and checks
+            const dailyHours = parseFloat(dailyHoursInput);
+            const weeklyGoal = parseFloat(weeklyGoalInput);
+
+            if (isNaN(dailyHours) || isNaN(weeklyGoal)) {
+                message.textContent =
+                    "Please enter valid numbers (for example: 1, 1.5, or 2).";
+                message.classList.add("error");
+                return;
+            }
+
+            if (dailyHours < 0) {
+                message.textContent =
+                    "Daily study hours cannot be negative. Please try again.";
+                message.classList.add("error");
+                return;
+            }
+
+            if (weeklyGoal <= 0) {
+                message.textContent =
+                    "Your weekly goal must be greater than zero. Please try again.";
+                message.classList.add("error");
+                return;
+            }
+
+            // Same logic as your Python code (but with correct 10 percent factor)
+            const estimatedWeeklyHours = dailyHours * 7;
+            const progressPercent = (estimatedWeeklyHours / weeklyGoal) * 10;
+            const difference = estimatedWeeklyHours - weeklyGoal;
+
+            // Show the summary text, similar to your print statements
+            summaryText1.textContent =
+                "Based on today, you are on track to study about " +
+                estimatedWeeklyHours.toFixed(1) +
+                " hours this week.";
+
+            summaryText2.textContent =
+                "Your weekly goal is " + weeklyGoal.toFixed(1) + " hours.";
+
+            summaryText3.textContent =
+                "That means you are at about " +
+                progressPercent.toFixed(1) +
+                "% of your goal.";
+
+            if (difference >= 0) {
+                interpretation.textContent =
+                    "Great job! You are ahead of your goal by about " +
+                    difference.toFixed(1) +
+                    " hours this week. Keep it up!";
+            } else {
+                interpretation.textContent =
+                    "You are currently about " +
+                    Math.abs(difference).toFixed(1) +
+                    " hours behind your goal. Consider adding a little extra study time on a few days to catch up.";
+            }
+
+            message.textContent = ""; // clear any old error
+            message.classList.remove("error");
+            summary.classList.remove("hidden");
+        });
+    </script>
+</body>
+</html>
