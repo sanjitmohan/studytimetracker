@@ -37,7 +37,7 @@ if weekly_goal <= 0:
 estimated_weekly_hours = daily_hours * 7
 
 # Calculate progress toward the goal
-progress_percent = (estimated_weekly_hours / weekly_goal) * 100
+progress_percent = (estimated_weekly_hours / weekly_goal) * 10
 difference = estimated_weekly_hours - weekly_goal
 
 # Task 4: Display clear, formatted output
