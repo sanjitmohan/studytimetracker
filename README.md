@@ -1,17 +1,11 @@
-# Assignment-Python-Project-GitHub-Workflow
-this assignment, you will build a small Python program, document it with a README.md, and publish the project to GitHub. The primary goal is to practice a professional workflow using VS Code + Git + GitHub, including making meaningful commits as you develop your code.
-Welcome to the Study Time Tracker!
-This program will estimate your weekly study hours based on today.
-
-How many hours did you study today? 2
-What is your weekly study goal (in hours)? 10
-
-===== Study Summary =====
-Based on today, you are on track to study about 14.0 hours this week.
-Your weekly goal is 10.0 hours.
-That means you are at about 140.0% of your goal.
-
-Great job! You are ahead of your goal by about 4.0 hours this week. Keep it up!
-
-Thank you for using the Study Time Tracker!
-vbnet
+# Study Time Tracker
+Study Time Tracker is a simple Python program that helps you estimate how many hours you are on track to study this week based on how much you studied today. It also compares your estimated weekly hours to your personal study goal and tells you whether you are ahead of or behind that goal. This project is part of a Python and GitHub workflow assignment and shows basic input handling, calculations, and error handling.
+## How to Run
+1. Make sure you have Python installed on your computer.
+2. Download or clone this repository to your computer.
+3. Open a terminal or command prompt in the folder that contains `app.py`.
+4. Run the program with one of these commands:
+```bash
+python app.py
+# or, on some systems:
+python3 app.py
